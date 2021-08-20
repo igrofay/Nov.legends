@@ -14,7 +14,7 @@ class User() : Parcelable {
         imagePath = parcel.readString()
     }
 
-    public constructor(firstName: String?, lastName: String?, imagePath: String?) : this() {
+    constructor(firstName: String?, lastName: String?, imagePath: String?) : this() {
         this.firstName = firstName
         this.lastName = lastName
         this.imagePath = imagePath
