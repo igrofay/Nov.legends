@@ -2,11 +2,17 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_main">
+    android:id="@+id/nav_main"
+    app:startDestination="@id/descriptionPlaceBottomSheetFragment">
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="food.novgorod.legends.feature.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <dialog
+        android:id="@+id/descriptionPlaceBottomSheetFragment"
+        android:name="food.novgorod.legends.feature.descriptionplace.DescriptionPlaceBottomSheetFragment"
+        android:label="DescriptionPlaceBottomSheetFragment"
+        tools:layout="@layout/fragment_description_place"/>
 </navigation>
