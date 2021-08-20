@@ -37,7 +37,8 @@
             android:paddingTop="46dp"
             android:paddingRight="24dp"
             android:text="@string/annotation_app"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textSize="16sp" />
 
         <FrameLayout
             android:layout_width="match_parent"

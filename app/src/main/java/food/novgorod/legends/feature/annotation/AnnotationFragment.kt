@@ -27,10 +27,6 @@ class AnnotationFragment : Fragment() {
             NavHostFragment.findNavController(this)
                 .navigate(R.id.action_annotationFragment_to_signUpFragment)
         }
-        binding.imageView.setOnLongClickListener {
-            NavHostFragment.findNavController(this).navigate(R.id.action_annotationFragment_to_mainActivity)
-            return@setOnLongClickListener false
-        }
     }
     override fun onDestroyView() {
         super.onDestroyView()

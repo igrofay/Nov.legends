@@ -16,12 +16,12 @@ import android.net.Uri
 
 import androidx.activity.result.contract.ActivityResultContracts
 import food.novgorod.legends.MainActivity
-import food.novgorod.legends.WelcomeActivity
-import food.novgorod.legends.WelcomeActivity.Companion.APP_PREFERENCES
-import food.novgorod.legends.WelcomeActivity.Companion.KEY_FIRSTNAME
-import food.novgorod.legends.WelcomeActivity.Companion.KEY_IMAGE
-import food.novgorod.legends.WelcomeActivity.Companion.KEY_LASTNAME
+
 import food.novgorod.legends.data.User
+import food.novgorod.legends.feature.welcome.WelcomeActivity.Companion.APP_PREFERENCES
+import food.novgorod.legends.feature.welcome.WelcomeActivity.Companion.KEY_FIRSTNAME
+import food.novgorod.legends.feature.welcome.WelcomeActivity.Companion.KEY_IMAGE
+import food.novgorod.legends.feature.welcome.WelcomeActivity.Companion.KEY_LASTNAME
 
 
 class SignUpFragment : Fragment() {
