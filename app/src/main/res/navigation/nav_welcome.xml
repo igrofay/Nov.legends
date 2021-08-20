@@ -7,28 +7,28 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="food.novgorod.legends.ui.welcome.SplashFragment"
+        android:name="food.novgorod.legends.feature.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_annotationFragment"
             app:destination="@id/annotationFragment" />
-        <action
-            android:id="@+id/action_splashFragment_to_mainActivity"
-            app:destination="@id/mainActivity" />
     </fragment>
     <fragment
         android:id="@+id/annotationFragment"
-        android:name="food.novgorod.legends.ui.welcome.AnnotationFragment"
+        android:name="food.novgorod.legends.feature.annotation.AnnotationFragment"
         android:label="fragment_annotation"
         tools:layout="@layout/fragment_annotation" >
         <action
             android:id="@+id/action_annotationFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_annotationFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="food.novgorod.legends.ui.welcome.SignUpFragment"
+        android:name="food.novgorod.legends.feature.signup.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <activity
         android:id="@+id/mainActivity"
-        android:name="food.novgorod.legends.MainActivity"
+        android:name="food.novgorod.legends.feature.main.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
 </navigation>
