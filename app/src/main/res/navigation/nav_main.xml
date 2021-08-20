@@ -2,14 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_main"
-    app:startDestination="@id/mapFragment">
+    android:id="@+id/nav_main">
 
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="food.novgorod.legends.feature.map.MapFragment"
-        android:label="fragment_map"
-        tools:layout="@layout/fragment_map" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="food.novgorod.legends.feature.profile.ProfileFragment"

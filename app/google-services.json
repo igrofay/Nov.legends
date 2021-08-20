@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "218040893747",
+    "project_id": "novgorod-legends",
+    "storage_bucket": "novgorod-legends.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218040893747:android:839a03f2ac8d70367fbe46",
+        "android_client_info": {
+          "package_name": "food.novgorod.legends"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218040893747-f0asi1be8j72s81u1g7kbgmq3r560tlp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlcMkq4zZCTQUNLlrDZHq5ClOC1M5OlY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "218040893747-f0asi1be8j72s81u1g7kbgmq3r560tlp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
