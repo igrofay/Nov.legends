@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_welcome"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="food.novgorod.legends.ui.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_annotationFragment"
+            app:destination="@id/annotationFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_nav_main"
+            app:destination="@id/nav_main" />
+    </fragment>
+    <fragment
+        android:id="@+id/annotationFragment"
+        android:name="food.novgorod.legends.ui.AnnotationFragment"
+        android:label="fragment_annotation"
+        tools:layout="@layout/fragment_annotation" >
+        <action
+            android:id="@+id/action_annotationFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="food.novgorod.legends.ui.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_nav_main"
+            app:destination="@id/nav_main" />
+    </fragment>
+    <include app:graph="@navigation/nav_main" />
+</navigation>
