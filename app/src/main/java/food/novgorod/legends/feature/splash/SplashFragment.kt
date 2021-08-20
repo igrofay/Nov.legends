@@ -17,7 +17,7 @@ class SplashFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
-    // В этом фрагменте происходит загрузка с FB
+    // TODO В этом фрагменте происходит загрузка с FB
     // и проверна на перый заход, если в sharedPreferences пусто , то мы ходим по навигации
     // если нет открываем MainActivity
 }

@@ -16,6 +16,12 @@ import food.novgorod.legends.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    companion object {
+        fun getIntent(context: Context): Intent {
+            return Intent(context, MainActivity::class.java)
+        }
+    }
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var googleMap: GoogleMap
 
@@ -23,10 +29,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        supportFragmentManager.beginTransaction()
-//            .add(MapFragment.newInstance(), "MapFragment")
-//            .commit()
-//        startActivity(Intent(this, MapsActivity::class.java))
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -36,14 +38,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         this.googleMap = googleMap
         googleMap.setMinZoomPreference(10.0f);
         googleMap.setMaxZoomPreference(20.0f);
-        // Add a marker in Sydney and move the camera
         val novgorodCoordinate = LatLng(55.002021, 82.956043)
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(novgorodCoordinate))
-    }
-    companion object{
-        const val KEY_USER = "KEY_USER==KEY_USER"
-        fun intentMainActivity(context: Context, user: User) = Intent(context , MainActivity::class.java).apply{
-            putExtra(KEY_USER , user)
-        }
     }
 }

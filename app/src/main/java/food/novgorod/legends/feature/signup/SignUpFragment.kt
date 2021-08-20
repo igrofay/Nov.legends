@@ -1,7 +1,6 @@
 package food.novgorod.legends.feature.signup
 
 
-import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,49 +13,31 @@ import android.widget.Toast
 import android.net.Uri
 
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.ViewModelProvider
 
 import food.novgorod.legends.data.User
 import food.novgorod.legends.feature.main.MainActivity
-import food.novgorod.legends.feature.welcome.WelcomeActivity.Companion.APP_PREFERENCES
-import food.novgorod.legends.feature.welcome.WelcomeActivity.Companion.KEY_FIRSTNAME
-import food.novgorod.legends.feature.welcome.WelcomeActivity.Companion.KEY_IMAGE
-import food.novgorod.legends.feature.welcome.WelcomeActivity.Companion.KEY_LASTNAME
 
 
 class SignUpFragment : Fragment() {
-    private var _binding: FragmentSignUpBinding?=null
-    private val binding get() = _binding!!
+
+    private lateinit var binding: FragmentSignUpBinding
+    private lateinit var viewModel: SignUpViewModel
     private var imagePath : String? =null
-    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent())  { uri: Uri? ->
-        if (uri != null){
-            imagePath = uri.path
-            binding.imageView2.setImageURI(uri)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentSignUpBinding.inflate(inflater,container,false)
-        return binding.root
-    }
+        binding = FragmentSignUpBinding.inflate(inflater,container,false)
+        viewModel = ViewModelProvider(this).get(SignUpViewModel::class.java)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding.imageView3.setOnClickListener{
             if(checkText()){
-                val sharedPreferencesEdit = requireContext().getSharedPreferences(APP_PREFERENCES, MODE_PRIVATE).edit()
-                sharedPreferencesEdit.putString(KEY_FIRSTNAME , binding.inputFirstname.text.toString())
-                sharedPreferencesEdit.putString(KEY_LASTNAME , binding.inputLastname.text.toString())
-                sharedPreferencesEdit.putString(KEY_IMAGE , imagePath ?: "" )
-                sharedPreferencesEdit.apply()
                 val user = User(binding.inputFirstname.text.toString() , binding.inputLastname.text.toString(), imagePath)
-                requireActivity().apply {
-                    startActivity(
-                        MainActivity.intentMainActivity(requireContext() , user )
-                    ) }.finish()
+                viewModel.saveUserData(user)
+                startNextActivity()
             }else{
                 Toast.makeText(requireContext() , R.string.empty_text , Toast.LENGTH_SHORT).show()
             }
@@ -64,11 +45,16 @@ class SignUpFragment : Fragment() {
         binding.addImage.setOnClickListener {
             getContent.launch("image/*")
         }
+
+        return binding.root
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+
+    private fun startNextActivity() {
+        val intent = MainActivity.getIntent(requireContext())
+        startActivity(intent)
+        requireActivity().finish()
     }
+
 
     private fun checkText(): Boolean{
         val textLog = binding.inputFirstname.text.toString()
@@ -78,6 +64,14 @@ class SignUpFragment : Fragment() {
         return strListLog.isNotEmpty() && textLog != ""
                 && strListPassword.isNotEmpty() && textPassword != ""
 
+    }
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent())
+    { uri: Uri? ->
+        if (uri != null){
+            imagePath = uri.path
+            binding.imageView2.setImageURI(uri)
+        }
     }
 
 
