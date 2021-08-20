@@ -16,5 +16,7 @@
     <style name="ImageLogoMap">
         <item name="android:src">@drawable/ic_logo_map</item>
     </style>
-
+    <style name="ImageNext">
+        <item name="android:src">@drawable/ic_button_next</item>
+    </style>
 </resources>
