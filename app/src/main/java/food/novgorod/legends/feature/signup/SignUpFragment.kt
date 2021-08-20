@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.NavHostFragment
 import food.novgorod.legends.R
 import food.novgorod.legends.databinding.FragmentSignUpBinding
 import android.widget.Toast
@@ -15,9 +14,9 @@ import android.widget.Toast
 import android.net.Uri
 
 import androidx.activity.result.contract.ActivityResultContracts
-import food.novgorod.legends.MainActivity
 
 import food.novgorod.legends.data.User
+import food.novgorod.legends.feature.main.MainActivity
 import food.novgorod.legends.feature.welcome.WelcomeActivity.Companion.APP_PREFERENCES
 import food.novgorod.legends.feature.welcome.WelcomeActivity.Companion.KEY_FIRSTNAME
 import food.novgorod.legends.feature.welcome.WelcomeActivity.Companion.KEY_IMAGE
