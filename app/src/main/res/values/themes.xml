@@ -19,4 +19,7 @@
     <style name="ImageNext">
         <item name="android:src">@drawable/ic_button_next</item>
     </style>
+    <style name="ImageSignUp">
+        <item name="android:src">@drawable/ic_button_sign</item>
+    </style>
 </resources>

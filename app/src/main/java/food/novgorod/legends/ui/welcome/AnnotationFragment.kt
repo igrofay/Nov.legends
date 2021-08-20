@@ -24,7 +24,8 @@ class AnnotationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.imageNext.setOnClickListener{
-            NavHostFragment.findNavController(this).navigate(R.id.action_annotationFragment_to_signUpFragment)
+            NavHostFragment.findNavController(this)
+                .navigate(R.id.action_annotationFragment_to_signUpFragment)
         }
     }
     override fun onDestroyView() {

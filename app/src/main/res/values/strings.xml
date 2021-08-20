@@ -3,8 +3,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="loading">Загрузка...</string>
-    <string name="annotation">Вас приветствует интерактивная карта фольклора Новгородскойобласти.
+    <string name="annotation_app">Вас приветствует интерактивная карта фольклора Новгородскойобласти.
         Это приложение позволяет найти различные местные истории, сказки и городские легенды.
         Исследуйте Новгородскую область вместе с нашей картой!</string>
     <string name="next">Продолжить</string>
+    <string name="annotation_sign_up">
+        Пожалуйста, введите данные, которые будут отображаться при написании отзывов
+    </string>
+    <string name="firstname">Имя</string>
+    <string name="lastname">Фамилия</string>
+    <string name="empty_text">Текст не должен быть пустым</string>
 </resources>
