@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="food.novgorod.legends.ui.SplashFragment"
+        android:name="food.novgorod.legends.ui.welcome.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/annotationFragment"
-        android:name="food.novgorod.legends.ui.AnnotationFragment"
+        android:name="food.novgorod.legends.ui.welcome.AnnotationFragment"
         android:label="fragment_annotation"
         tools:layout="@layout/fragment_annotation" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="food.novgorod.legends.ui.SignUpFragment"
+        android:name="food.novgorod.legends.ui.welcome.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
