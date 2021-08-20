@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_welcome"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/annotationFragment">
 
     <fragment
         android:id="@+id/splashFragment"
@@ -14,8 +14,8 @@
             android:id="@+id/action_splashFragment_to_annotationFragment"
             app:destination="@id/annotationFragment" />
         <action
-            android:id="@+id/action_splashFragment_to_nav_main"
-            app:destination="@id/nav_main" />
+            android:id="@+id/action_splashFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
     <fragment
         android:id="@+id/annotationFragment"
@@ -32,8 +32,12 @@
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
-            android:id="@+id/action_signUpFragment_to_nav_main"
-            app:destination="@id/nav_main" />
+            android:id="@+id/action_signUpFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
     </fragment>
-    <include app:graph="@navigation/nav_main" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="food.novgorod.legends.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 </navigation>
