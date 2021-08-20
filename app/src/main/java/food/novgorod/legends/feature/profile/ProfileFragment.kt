@@ -1,4 +1,4 @@
-package food.novgorod.legends.ui.main
+package food.novgorod.legends.feature.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

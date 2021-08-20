@@ -1,4 +1,4 @@
-package food.novgorod.legends
+package food.novgorod.legends.feature.welcome
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

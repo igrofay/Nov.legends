@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/mapFragment"
-        android:name="food.novgorod.legends.ui.main.MapFragment"
+        android:name="food.novgorod.legends.feature.map.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="food.novgorod.legends.ui.main.ProfileFragment"
+        android:name="food.novgorod.legends.feature.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
