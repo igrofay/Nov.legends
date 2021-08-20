@@ -1,4 +1,4 @@
-package food.novgorod.legends.ui.welcome
+package food.novgorod.legends.feature.annotation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -26,6 +26,10 @@ class AnnotationFragment : Fragment() {
         binding.imageNext.setOnClickListener{
             NavHostFragment.findNavController(this)
                 .navigate(R.id.action_annotationFragment_to_signUpFragment)
+        }
+        binding.imageView.setOnLongClickListener {
+            NavHostFragment.findNavController(this).navigate(R.id.action_annotationFragment_to_mainActivity)
+            return@setOnLongClickListener false
         }
     }
     override fun onDestroyView() {

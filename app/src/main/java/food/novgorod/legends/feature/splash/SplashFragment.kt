@@ -1,4 +1,4 @@
-package food.novgorod.legends.ui.welcome
+package food.novgorod.legends.feature.splash
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

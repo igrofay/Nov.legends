@@ -1,4 +1,4 @@
-package food.novgorod.legends.ui.welcome
+package food.novgorod.legends.feature.signup
 
 
 import android.content.Context.MODE_PRIVATE
