@@ -9,8 +9,6 @@ import android.util.Log
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import com.google.android.gms.location.places.Places
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -20,28 +18,24 @@ import com.google.android.gms.maps.model.*
 import food.novgorod.legends.databinding.ActivityMainBinding
 
 import food.novgorod.legends.R
-import food.novgorod.legends.data.LoadState
 import food.novgorod.legends.data.MapPropertiesProvider
 import food.novgorod.legends.feature.profile.ProfileFragment
-import food.novgorod.legends.data.models.Place
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
 import android.graphics.Bitmap
 
 import androidx.core.content.ContextCompat
 
-import android.graphics.drawable.Drawable
 
 import android.graphics.Canvas
-import android.widget.Toast
 
 import androidx.annotation.DrawableRes
 
 import com.google.android.gms.maps.model.BitmapDescriptor
 import food.novgorod.legends.data.PlaceObject
 import food.novgorod.legends.domain.place.PlaceRepository
+import food.novgorod.legends.feature.descriptionplace.DescriptionPlaceBottomSheetFragment
 
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -141,7 +135,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        Log.e("KJNSOJSR", marker.tag.toString())
+        DescriptionPlaceBottomSheetFragment().show(supportFragmentManager , marker.tag?.toString())
         return true
     }
     private fun bitmapDescriptorFromVector(

@@ -50,7 +50,7 @@
                 android:fontFamily="@font/roboto_medium"
                 android:padding="24dp"
                 android:text="Описание места Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper quam sit amet felis ornare vehicula et at arcu. Vivamus in elementum sapien. Duis tempus ornare enim, et consectetur enim interdum quis. Nulla vitae nisl pellentesque, vehicula ligula ac, euismod nibh. Integer laoreet laoreet sem, quis congue ipsum lobortis et. Morbi molestie tortor ut orci suscipit luctus. Donec tincidunt sapien vel dapibus consequat. Suspendisse potenti. Cras quam nunc, ornare in volutpat vitae, pharetra id nisl. "
-                android:textAlignment="viewStart"
+                android:textAlignment="center"
                 android:textColor="@color/white" />
 
             <TextView
