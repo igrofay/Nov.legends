@@ -47,10 +47,6 @@ class SplashFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        DescriptionPlaceBottomSheetFragment().show(childFragmentManager , "TAG")
-    }
 
     private fun goToAnnotation() {
         NavHostFragment.findNavController(this).navigate(R.id.action_splashFragment_to_annotationFragment)
