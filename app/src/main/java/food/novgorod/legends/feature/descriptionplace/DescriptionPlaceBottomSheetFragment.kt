@@ -5,7 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import food.novgorod.legends.R
 import food.novgorod.legends.databinding.FragmentDescriptionPlaceBinding
+
+
+
+
 
 class DescriptionPlaceBottomSheetFragment : BottomSheetDialogFragment() {
 

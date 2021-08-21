@@ -22,4 +22,5 @@
     <style name="ImageSignUp">
         <item name="android:src">@drawable/ic_button_sign</item>
     </style>
+
 </resources>
