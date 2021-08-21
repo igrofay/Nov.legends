@@ -42,7 +42,7 @@ class SignUpFragment : Fragment() {
             if(checkText()){
                 val user = User(binding.inputName.text.toString() , binding.inputPhone.text.toString(), imagePath ?: "")
                 viewModel.saveUserData(user)
-
+                startNextActivity()
             }else{
                 Toast.makeText(requireContext() , R.string.empty_text , Toast.LENGTH_SHORT).show()
             }

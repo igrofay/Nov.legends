@@ -21,4 +21,5 @@
     <string name="routes">Маршруты</string>
     <string name="reviews">Отзывы</string>
     <string name="profile">Профиль</string>
+    <string name="problem_internet">Проблема с интернетом</string>
 </resources>

@@ -20,11 +20,17 @@ object UserRepository {
         sharedPreferencesEdit.putString(IMAGEPATH , user.imagePath)
         sharedPreferencesEdit.apply()
     }
-    fun loadUserPhone(): String? {
+    fun getUserData(): Boolean{
         val sharedPreferences = App.appContext.getSharedPreferences(
             prefTag,
             Context.MODE_PRIVATE
         )
-        return sharedPreferences.getString(PHONE, null)
+        val phone = sharedPreferences.getString(PHONE , null)
+        val name = sharedPreferences.getString(NAME , null)
+        val image = sharedPreferences.getString(IMAGEPATH , "")
+        if (phone == null && name == null) return false
+        currentUser = User(name.toString() , phone.toString() , image.toString())
+        return true
     }
+    
 }

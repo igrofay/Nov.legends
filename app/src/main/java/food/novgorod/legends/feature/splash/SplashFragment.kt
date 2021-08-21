@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import food.novgorod.legends.R
 import food.novgorod.legends.data.LoadState
 import food.novgorod.legends.databinding.FragmentSplashBinding
+import food.novgorod.legends.domain.user.UserRepository
 import food.novgorod.legends.feature.main.MainActivity
 import kotlinx.coroutines.flow.collect
 import food.novgorod.legends.feature.descriptionplace.DescriptionPlaceBottomSheetFragment
@@ -28,8 +29,17 @@ class SplashFragment : Fragment() {
     ): View? {
         binding = FragmentSplashBinding.inflate(inflater)
         viewModel = ViewModelProvider(this).get(SplashViewModel::class.java)
-        binding.progressBar.progress = 0
-        goToMainActivity()
+        viewModel.liveData.observe(viewLifecycleOwner , {
+            binding.progressBar.progress = it
+            if(it==100){
+                if(UserRepository.getUserData()){
+                    goToMainActivity()
+                }else {
+                    goToAnnotation()
+                }
+            }
+        })
+
         return binding.root
     }
 
