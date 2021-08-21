@@ -41,24 +41,8 @@ class SignUpFragment : Fragment() {
         binding.imageView3.setOnClickListener{
             if(checkText()){
                 val user = User(binding.inputName.text.toString() , binding.inputPhone.text.toString(), imagePath ?: "")
-                viewModel.loadUser(user.phone)
-                lifecycleScope.launch {
-                    viewModel.signUpStateFlow.collect {
-                        when(it) {
-                            is LoadState.NotExist -> {
-                                viewModel.saveUserData(user)
-                                startNextActivity()
-                            }
-                            is LoadState.Loaded -> {
-                                viewModel.saveUserData(it.result as User)
-                                startNextActivity()
-                            }
-                            else -> {
-                                //do nothing
-                            }
-                        }
-                    }
-                }
+                viewModel.saveUserData(user)
+
             }else{
                 Toast.makeText(requireContext() , R.string.empty_text , Toast.LENGTH_SHORT).show()
             }

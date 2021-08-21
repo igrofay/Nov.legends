@@ -29,21 +29,7 @@ class SplashFragment : Fragment() {
         binding = FragmentSplashBinding.inflate(inflater)
         viewModel = ViewModelProvider(this).get(SplashViewModel::class.java)
         binding.progressBar.progress = 0
-        val callback = viewModel.loadUser()
-        lifecycleScope.launchWhenResumed {
-            callback.collect {
-                binding.progressBar.progress = 100
-                when(it) {
-                    is LoadState.InProgress -> {}
-                    is LoadState.Loaded -> {
-                        goToMainActivity()
-                    }
-                    else -> {
-                        goToAnnotation()
-                    }
-                }
-            }
-        }
+        goToMainActivity()
         return binding.root
     }
 

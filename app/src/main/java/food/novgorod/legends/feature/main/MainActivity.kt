@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        viewModel.loadPlaces()
+
 
         setContentView(binding.root)
 
@@ -95,21 +95,21 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         val novgorodCoordinate = LatLng(55.002021, 82.956043)
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(novgorodCoordinate))
 
-        collectMarkers()
+        //collectMarkers()
     }
 
-    private fun collectMarkers() {
-        lifecycleScope.launch {
-            viewModel.placeLoadState.collect {
-                Log.e("TEST", "$it")
-                if (it is LoadState.Loaded) {
-                    val markers = it.result as List<Place>
-                    clearMarkers()
-                    createNewMarkers(markers)
-                }
-            }
-        }
-    }
+  //  private fun collectMarkers() {
+  //      lifecycleScope.launch {
+  //          viewModel.placeLoadState.collect {
+  //              Log.e("TEST", "$it")
+  //              if (it is LoadState.Loaded) {
+  //                  val markers = it.result as List<Place>
+  //                  clearMarkers()
+  //                  createNewMarkers(markers)
+  //              }
+  //          }
+  //      }
+  //  }
 
     private fun createNewMarkers(markers: List<Place>) {
         markers.forEach {
@@ -131,6 +131,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
+        Log.e("KJNSOJSR", "IJWNIFUNER")
         return true
     }
     private fun bitmapDescriptorFromVector(
