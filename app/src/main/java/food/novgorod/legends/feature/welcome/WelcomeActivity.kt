@@ -9,7 +9,11 @@ import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.database.FirebaseDatabase
 import food.novgorod.legends.R
 import food.novgorod.legends.data.LoadState
+import food.novgorod.legends.data.models.Place
+import food.novgorod.legends.data.models.Tag
 import food.novgorod.legends.databinding.ActivityWelcomeBinding
+import food.novgorod.legends.domain.firebase.FirebaseRoute
+import food.novgorod.legends.domain.firebase.FirebaseRouteProvider
 import food.novgorod.legends.feature.main.MainActivity
 import kotlinx.coroutines.flow.collect
 
