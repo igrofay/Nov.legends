@@ -35,13 +35,13 @@ import androidx.core.content.ContextCompat
 import android.graphics.drawable.Drawable
 
 import android.graphics.Canvas
+import android.widget.Toast
 
 import androidx.annotation.DrawableRes
 
 import com.google.android.gms.maps.model.BitmapDescriptor
-
-
-
+import food.novgorod.legends.data.PlaceObject
+import food.novgorod.legends.domain.place.PlaceRepository
 
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -63,6 +63,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
 
+
+
         setContentView(binding.root)
 
         val mapFragment = supportFragmentManager
@@ -79,8 +81,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
-        googleMap.setMinZoomPreference(10.0f);
-        googleMap.setMaxZoomPreference(20.0f);
+        googleMap.setMinZoomPreference(8.0f);
+        googleMap.setMaxZoomPreference(30.0f);
         try {
 
             val success: Boolean = googleMap.setMapStyle(
@@ -92,35 +94,43 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         } catch (e: Resources.NotFoundException) {
             Log.e("MapsActivityRaw", "Can't find style.", e)
         }
-        val novgorodCoordinate = LatLng(55.002021, 82.956043)
+        val novgorodCoordinate = LatLng(58.522869, 31.269793)
+
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(novgorodCoordinate))
+
+        createNewMarkers(PlaceRepository.listPlace)
+
+        googleMap.setOnMarkerClickListener(this)
 
         //collectMarkers()
     }
 
-  //  private fun collectMarkers() {
-  //      lifecycleScope.launch {
-  //          viewModel.placeLoadState.collect {
-  //              Log.e("TEST", "$it")
-  //              if (it is LoadState.Loaded) {
-  //                  val markers = it.result as List<Place>
-  //                  clearMarkers()
-  //                  createNewMarkers(markers)
-  //              }
-  //          }
-  //      }
-  //  }
+//    private fun collectMarkers() {
+//        lifecycleScope.launch {
+//            viewModel.placeLoadState.collect {
+//                Log.e("TEST", "$it")
+//                if (it is LoadState.Loaded) {
+//                    val markers = it.result as List<Place>
+//                    clearMarkers()
+//                    createNewMarkers(markers)
+//                }
+//            }
+//        }
+//    }
 
-    private fun createNewMarkers(markers: List<Place>) {
+    private fun createNewMarkers(markers: List<PlaceObject>)  {
         markers.forEach {
-            val latLng = LatLng(it.lat, it.lng)
+            if(it.coor == "") return@forEach
+            val lat = it.coor.split(", ")
+            Log.e("Porno" , lat[0])
+            val latLng = LatLng(lat[0].toDouble(), lat[1].toDouble())
             val marker = googleMap.addMarker(
                 MarkerOptions()
                     .position(latLng)
                     .icon(bitmapDescriptorFromVector(this, R.drawable.ic_orangemarker))
-                    .title(it.name)
+                    .title(it.type)
             ) ?: return
-            marker.tag = it.placeId
+            marker.tag = it.id
         }
     }
 
@@ -131,7 +141,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        Log.e("KJNSOJSR", "IJWNIFUNER")
+        Log.e("KJNSOJSR", marker.tag.toString())
         return true
     }
     private fun bitmapDescriptorFromVector(

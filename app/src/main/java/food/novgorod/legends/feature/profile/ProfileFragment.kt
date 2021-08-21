@@ -22,9 +22,8 @@ class ProfileFragment : Fragment() {
     ): View? {
         binding = FragmentProfileBinding.inflate(inflater,container,false)
         val user = UserRepository.currentUser
-
-        Glide.with(this).load(user?.imagePath).
-        into(binding.iconProfile)
+        Glide.with(this).load(user?.imagePath)
+            .error(R.drawable.ic_user).into(binding.iconProfile)
         binding.textView4.text = user?.name
         binding.backProfile.setOnClickListener{
             fragmentManager?.popBackStack()
