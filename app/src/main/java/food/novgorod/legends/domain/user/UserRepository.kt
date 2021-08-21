@@ -3,9 +3,10 @@ package food.novgorod.legends.domain.user
 import android.content.Context
 import food.novgorod.legends.data.User
 import food.novgorod.legends.feature.app.App
+import food.novgorod.legends.feature.app.App.Companion.prefTag
 
 object UserRepository {
-    const val prefTag = "AppData"
+
     const val PHONE = "phone"
     const val NAME = "name"
     const val IMAGEPATH = "pathImage"
