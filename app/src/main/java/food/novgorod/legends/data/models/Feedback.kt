@@ -12,5 +12,4 @@ data class Feedback(
     var rating: Int = 0,
     var text: String = "",
     var date: String = ""
-) {
-}
+)
