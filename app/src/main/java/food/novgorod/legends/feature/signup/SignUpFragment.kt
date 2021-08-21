@@ -11,11 +11,11 @@ import food.novgorod.legends.databinding.FragmentSignUpBinding
 import android.widget.Toast
 
 import android.net.Uri
-import android.util.Log
 
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import food.novgorod.legends.data.LoadState
 
 import food.novgorod.legends.data.User
@@ -40,7 +40,7 @@ class SignUpFragment : Fragment() {
 
         binding.imageView3.setOnClickListener{
             if(checkText()){
-                val user = User(binding.inputFirstname.text.toString() , binding.inputPhone.text.toString(), imagePath ?: "")
+                val user = User(binding.inputName.text.toString() , binding.inputPhone.text.toString(), imagePath ?: "")
                 viewModel.loadUser(user.phone)
                 lifecycleScope.launch {
                     viewModel.signUpStateFlow.collect {
@@ -78,7 +78,7 @@ class SignUpFragment : Fragment() {
 
 
     private fun checkText(): Boolean{
-        val textLog = binding.inputFirstname.text.toString()
+        val textLog = binding.inputName.text.toString()
         val strListLog: List<String> = textLog.split(" ")
         val textPassword = binding.inputPhone.text.toString()
         val strListPassword: List<String> = textPassword.split(" ")
@@ -90,8 +90,8 @@ class SignUpFragment : Fragment() {
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent())
     { uri: Uri? ->
         if (uri != null){
-            imagePath = uri.path
-            binding.imageView2.setImageURI(uri)
+            imagePath = uri.toString()
+            Glide.with(this).load(uri).into(binding.imageView2)
         }
     }
 

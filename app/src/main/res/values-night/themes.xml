@@ -24,4 +24,5 @@
     </style>
     <color name="color_background_bottom">@color/black_background</color>
     <color name="color_text">@color/white</color>
+    <color name="while_back">@color/black</color>
 </resources>

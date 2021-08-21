@@ -2,24 +2,23 @@ package food.novgorod.legends.feature.main
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import food.novgorod.legends.data.User
 import food.novgorod.legends.databinding.ActivityMainBinding
 
 import com.google.android.gms.maps.model.MapStyleOptions
 import food.novgorod.legends.R
 import food.novgorod.legends.data.MapPropertiesProvider
-import java.util.*
+import food.novgorod.legends.feature.profile.ProfileFragment
 
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -41,6 +40,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        binding.nextToProfile.setOnClickListener {
+            supportFragmentManager.commit {
+                replace<ProfileFragment>(R.id.content, "tag")
+                setReorderingAllowed(true)
+                addToBackStack(null)
+            }
+        }
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
