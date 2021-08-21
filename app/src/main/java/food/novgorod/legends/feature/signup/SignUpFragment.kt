@@ -11,12 +11,17 @@ import food.novgorod.legends.databinding.FragmentSignUpBinding
 import android.widget.Toast
 
 import android.net.Uri
+import android.util.Log
 
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import food.novgorod.legends.data.LoadState
 
 import food.novgorod.legends.data.User
 import food.novgorod.legends.feature.main.MainActivity
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 class SignUpFragment : Fragment() {
@@ -35,9 +40,25 @@ class SignUpFragment : Fragment() {
 
         binding.imageView3.setOnClickListener{
             if(checkText()){
-                val user = User(binding.inputFirstname.text.toString() , binding.inputLastname.text.toString(), imagePath)
-                viewModel.saveUserData(user)
-                startNextActivity()
+                val user = User(binding.inputFirstname.text.toString() , binding.inputPhone.text.toString(), imagePath ?: "")
+                viewModel.loadUser(user.phone)
+                lifecycleScope.launch {
+                    viewModel.signUpStateFlow.collect {
+                        when(it) {
+                            is LoadState.NotExist -> {
+                                viewModel.saveUserData(user)
+                                startNextActivity()
+                            }
+                            is LoadState.Loaded -> {
+                                viewModel.saveUserData(it.result as User)
+                                startNextActivity()
+                            }
+                            else -> {
+                                //do nothing
+                            }
+                        }
+                    }
+                }
             }else{
                 Toast.makeText(requireContext() , R.string.empty_text , Toast.LENGTH_SHORT).show()
             }
@@ -59,7 +80,7 @@ class SignUpFragment : Fragment() {
     private fun checkText(): Boolean{
         val textLog = binding.inputFirstname.text.toString()
         val strListLog: List<String> = textLog.split(" ")
-        val textPassword = binding.inputLastname.text.toString()
+        val textPassword = binding.inputPhone.text.toString()
         val strListPassword: List<String> = textPassword.split(" ")
         return strListLog.isNotEmpty() && textLog != ""
                 && strListPassword.isNotEmpty() && textPassword != ""

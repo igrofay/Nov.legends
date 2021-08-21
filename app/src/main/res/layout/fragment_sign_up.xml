@@ -75,11 +75,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/input_lastname"
+            android:id="@+id/input_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/lastname"
-            android:inputType="text" />
+            android:hint="@string/phone"
+            android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

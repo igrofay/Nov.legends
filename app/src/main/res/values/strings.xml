@@ -12,8 +12,10 @@
         Пожалуйста, введите данные, которые будут отображаться при написании отзывов
     </string>
     <string name="firstname">Имя</string>
-    <string name="lastname">Фамилия</string>
+    <string name="phone">Номер телефона</string>
     <string name="empty_text">Текст не должен быть пустым</string>
+
+    <string name="map_id">7c7a2a1329c030f1</string>
     <string name="photo_video">Фото и видео</string>
     <string name="audio_guide">Аудио-гид</string>
 </resources>

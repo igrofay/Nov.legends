@@ -2,6 +2,7 @@ package food.novgorod.legends.feature.app
 
 import android.app.Application
 import android.content.Context
+import android.widget.Toast
 
 class App: Application() {
     companion object {
@@ -11,4 +12,5 @@ class App: Application() {
         super.onCreate()
         appContext = applicationContext
     }
+
 }
