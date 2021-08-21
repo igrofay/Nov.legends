@@ -49,7 +49,7 @@ public class GPSTracker extends Service implements LocationListener {
     // Declaring a Location Manager
     protected LocationManager locationManager;
 
-    public GPSTracker(Context context, FragmentActivity mainActivity) {
+    public GPSTracker(Context context, MainActivity mainActivity) {
         this.mainActivity = this.mainActivity;
         this.mContext = context;
         getLocation();

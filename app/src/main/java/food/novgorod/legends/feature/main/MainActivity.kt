@@ -1,41 +1,52 @@
 package food.novgorod.legends.feature.main
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Resources
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.location.places.Places
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.*
-import food.novgorod.legends.databinding.ActivityMainBinding
 
 import food.novgorod.legends.R
+import food.novgorod.legends.data.LoadState
 import food.novgorod.legends.data.MapPropertiesProvider
 import food.novgorod.legends.feature.profile.ProfileFragment
-
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
 import android.graphics.Bitmap
 
 import androidx.core.content.ContextCompat
 
+import android.graphics.drawable.Drawable
 
 import android.graphics.Canvas
+import android.widget.Toast
 
 import androidx.annotation.DrawableRes
 
 import com.google.android.gms.maps.model.BitmapDescriptor
 import food.novgorod.legends.data.PlaceObject
+import food.novgorod.legends.databinding.ActivityMainBinding
 import food.novgorod.legends.domain.place.PlaceRepository
 import food.novgorod.legends.feature.descriptionplace.DescriptionPlaceBottomSheetFragment
+import food.novgorod.legends.feature.services.GPSTracker
 
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -50,6 +61,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     private lateinit var viewModel: MainViewModel
     private lateinit var googleMap: GoogleMap
     private val markers: MutableList<Marker> = mutableListOf()
+    lateinit var gpsTracker: GPSTracker
+
+    var canGetLocation = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,6 +75,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
 
         setContentView(binding.root)
+
+        getLocationPermission()
+
+        binding.myLocation.setOnClickListener {
+            if (canGetLocation) {
+                moveCameraOnLocation()
+            }
+        }
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.mapFragment) as SupportMapFragment
@@ -73,9 +96,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         }
     }
 
+    @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
-        googleMap.setMinZoomPreference(8.0f);
+        googleMap.setMinZoomPreference(5.0f);
         googleMap.setMaxZoomPreference(30.0f);
         try {
 
@@ -95,6 +119,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         createNewMarkers(PlaceRepository.listPlace)
 
         googleMap.setOnMarkerClickListener(this)
+
+        if (canGetLocation) {
+            googleMap.isMyLocationEnabled = true
+        }
+
+        googleMap.uiSettings.isMyLocationButtonEnabled = false
 
         //collectMarkers()
     }
@@ -136,6 +166,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMarkerClick(marker: Marker): Boolean {
         DescriptionPlaceBottomSheetFragment().show(supportFragmentManager , marker.tag?.toString())
+        Toast.makeText(this, marker.tag?.toString(), Toast.LENGTH_SHORT).show()
         return true
     }
     private fun bitmapDescriptorFromVector(
@@ -161,4 +192,68 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         vectorDrawable.draw(canvas)
         return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
+
+    fun moveCameraOnLocation() {
+        val pos = LatLng(gpsTracker.latitude, gpsTracker.longitude)
+        googleMap.moveCamera(CameraUpdateFactory.zoomTo(10F));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLng(pos))
+    }
+
+
+
+    private fun getLocationPermission() {
+
+        if (ContextCompat.checkSelfPermission(this@MainActivity,
+                Manifest.permission.ACCESS_FINE_LOCATION) !==
+            PackageManager.PERMISSION_GRANTED) {
+                Log.e("LLLLLLL", "PINOINWRFR")
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this@MainActivity,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                )
+            ) {
+                ActivityCompat.requestPermissions(
+                    this@MainActivity,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
+                )
+
+            } else {
+                ActivityCompat.requestPermissions(
+                    this@MainActivity,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1
+                )
+            }
+        } else {
+            canGetLocation = true
+            gpsTracker = GPSTracker(this@MainActivity, this@MainActivity)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
+                                            grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        when (requestCode) {
+            1 -> {
+                if (grantResults.isNotEmpty() && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED
+                ) {
+                    if ((ContextCompat.checkSelfPermission(
+                            this@MainActivity,
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) ===
+                                PackageManager.PERMISSION_GRANTED)
+                    ) {
+                        Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+                        canGetLocation = true
+                        googleMap.isMyLocationEnabled = true
+                        gpsTracker = GPSTracker(this@MainActivity, this@MainActivity)
+                    }
+                } else {
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+                }
+                return
+            }
+        }
+    }
+
 }
