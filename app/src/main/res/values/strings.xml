@@ -18,4 +18,7 @@
     <string name="map_id">7c7a2a1329c030f1</string>
     <string name="photo_video">Фото и видео</string>
     <string name="audio_guide">Аудио-гид</string>
+    <string name="routes">Маршруты</string>
+    <string name="reviews">Отзывы</string>
+    <string name="profile">Профиль</string>
 </resources>

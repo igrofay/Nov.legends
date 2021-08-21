@@ -48,6 +48,7 @@ class SplashFragment : Fragment() {
     }
 
 
+
     private fun goToAnnotation() {
         NavHostFragment.findNavController(this).navigate(R.id.action_splashFragment_to_annotationFragment)
     }

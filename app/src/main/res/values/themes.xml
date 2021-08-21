@@ -36,4 +36,5 @@
 
     <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialog" />
     <color name="color_background_bottom">@color/blue</color>
+    <color name="color_text">@color/black</color>
 </resources>
