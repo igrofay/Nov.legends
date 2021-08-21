@@ -22,5 +22,5 @@
     <style name="ImageSignUp">
         <item name="android:src">@drawable/ic_buttonsign_up_dark</item>
     </style>
-
+    <color name="color_background_bottom">@color/black_background</color>
 </resources>

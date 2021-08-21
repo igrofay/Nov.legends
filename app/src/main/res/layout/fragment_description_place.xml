@@ -30,7 +30,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/namePlace"
@@ -39,6 +39,7 @@
                 android:fontFamily="@font/roboto_black"
                 android:text="Название места"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 android:textSize="28sp" />
 
             <TextView
@@ -48,7 +49,8 @@
                 android:fontFamily="@font/roboto_medium"
                 android:padding="24dp"
                 android:text="Описание места Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper quam sit amet felis ornare vehicula et at arcu. Vivamus in elementum sapien. Duis tempus ornare enim, et consectetur enim interdum quis. Nulla vitae nisl pellentesque, vehicula ligula ac, euismod nibh. Integer laoreet laoreet sem, quis congue ipsum lobortis et. Morbi molestie tortor ut orci suscipit luctus. Donec tincidunt sapien vel dapibus consequat. Suspendisse potenti. Cras quam nunc, ornare in volutpat vitae, pharetra id nisl. "
-                android:textAlignment="viewStart" />
+                android:textAlignment="viewStart"
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/textView9"
@@ -58,6 +60,7 @@
                 android:paddingBottom="24dp"
                 android:text="@string/photo_video"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
@@ -85,6 +88,7 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="@string/audio_guide"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
