@@ -3,9 +3,9 @@ package food.novgorod.legends.data.models
 import android.graphics.Color
 
 data class Place(
-    var placeId: String,
-    var lat: Long = 0L,
-    var lng: Long = 0L,
+    var placeId: String = "null",
+    var lat: Double = 0.0,
+    var lng: Double = 0.0,
     var color: String = "",
     var name: String = "",
     var description: String = "",

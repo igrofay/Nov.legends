@@ -1,6 +1,5 @@
 package food.novgorod.legends.feature.splash
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -11,12 +10,11 @@ import food.novgorod.legends.domain.firebase.FirebaseRoute
 import food.novgorod.legends.domain.firebase.FirebaseRouteProvider
 import food.novgorod.legends.domain.user.UserRepository
 import food.novgorod.legends.feature.app.showToast
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class SplashViewModel: ViewModel() {
+
     fun loadUser(): StateFlow<LoadState> {
         val resStateFlow = MutableStateFlow<LoadState>(LoadState.InProgress)
         val phone = UserRepository.loadUserPhone()
