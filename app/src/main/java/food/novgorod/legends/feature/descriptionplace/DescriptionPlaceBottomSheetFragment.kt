@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.NonNull
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import food.novgorod.legends.R
 import food.novgorod.legends.databinding.FragmentDescriptionPlaceBinding
 import food.novgorod.legends.domain.place.PlaceRepository
@@ -33,6 +36,15 @@ private lateinit var binding: FragmentDescriptionPlaceBinding
         binding.imagesRV.layoutManager = LinearLayoutManager(context , LinearLayoutManager.HORIZONTAL , false)
         val snapHelper: SnapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(binding.imagesRV)
+
+        binding.thirdPartyPlayerView.getPlayerUiController().showFullscreenButton(true)
+        binding.thirdPartyPlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(@NonNull youTubePlayer: YouTubePlayer) {
+                val videoId = "oqH-nPCmlB0"
+                youTubePlayer.cueVideo(videoId, 0f)
+            }
+        })
+
         return binding.root
     }
 }
