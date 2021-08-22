@@ -26,4 +26,12 @@
     <string name="filter">Фильтр</string>
     <string name="save_edit">Сохранить изменения</string>
     <string name="search">Поиск...</string>
+    <string name="type">По типу</string>
+    <string name="legends">легенды</string>
+    <string name="tradition">предания</string>
+    <string name="fairy_tales">сказки</string>
+    <string name="lake">озеро</string>
+    <string name="source">источник</string>
+    <string name="stone">камень</string>
+    <string name="other">другое</string>
 </resources>
