@@ -16,9 +16,13 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import food.novgorod.legends.data.LoadState
 
 import food.novgorod.legends.data.User
+import food.novgorod.legends.feature.app.showToast
 import food.novgorod.legends.feature.main.MainActivity
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -29,6 +33,7 @@ class SignUpFragment : Fragment() {
     private lateinit var binding: FragmentSignUpBinding
     private lateinit var viewModel: SignUpViewModel
     private var imagePath : String? =null
+    private lateinit var database: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +58,7 @@ class SignUpFragment : Fragment() {
 
         return binding.root
     }
+
 
     private fun startNextActivity() {
         val intent = MainActivity.getIntent(requireContext())
