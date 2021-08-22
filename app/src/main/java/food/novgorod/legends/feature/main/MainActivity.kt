@@ -178,7 +178,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     override fun onMarkerClick(marker: Marker): Boolean {
         DescriptionPlaceBottomSheetFragment().show(supportFragmentManager , marker.tag?.toString())
-        Toast.makeText(this, marker.tag?.toString(), Toast.LENGTH_SHORT).show()
+//        Toast.makeText(this, marker.tag?.toString(), Toast.LENGTH_SHORT).show()
         return true
     }
     private fun bitmapDescriptorFromVector(

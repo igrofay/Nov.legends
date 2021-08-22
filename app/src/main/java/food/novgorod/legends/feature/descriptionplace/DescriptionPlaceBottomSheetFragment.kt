@@ -9,6 +9,8 @@ import androidx.annotation.NonNull
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.SnapHelper
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -22,7 +24,9 @@ class DescriptionPlaceBottomSheetFragment : BottomSheetDialogFragment() {
     override fun getTheme(): Int = R.style.BottomSheetDialogTheme
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(requireContext(), theme)
 
-private lateinit var binding: FragmentDescriptionPlaceBinding
+    private lateinit var binding: FragmentDescriptionPlaceBinding
+    var isPlaying = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,6 +48,24 @@ private lateinit var binding: FragmentDescriptionPlaceBinding
                 youTubePlayer.cueVideo(videoId, 0f)
             }
         })
+
+        val player = SimpleExoPlayer.Builder(requireContext()).build()
+
+        binding.playPause.setOnClickListener {
+            val mediaItem: MediaItem = MediaItem.fromUri("https://ic7.101.ru:8000/region_humor_165")
+            player.setMediaItem(mediaItem)
+            player.prepare()
+
+            if (isPlaying) {
+                player.pause()
+                isPlaying = false
+                binding.playPause.text = "Play"
+            } else {
+                player.play()
+                isPlaying = true
+                binding.playPause.text = "Pause"
+            }
+        }
 
         return binding.root
     }
