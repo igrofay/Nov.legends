@@ -80,10 +80,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-
-
-
         setContentView(binding.root)
 
         getLocationPermission()
@@ -93,6 +89,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 moveCameraOnLocation()
             }
         }
+
+        binding.bildRoute.setOnClickListener {
+            addPolyLine(PlaceRepository.listPlace)
+        }
+
+        route = mutableListOf()
+
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.mapFragment) as SupportMapFragment
@@ -211,15 +214,17 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     lateinit var tempObject: PlaceObject
     // можно ставить несколько точек(больше 2х) и будет рисовать линию поочерёдно
     fun addPolyLine(markers: List<PlaceObject>) {
+        var plo = PolylineOptions()
         var count = 0
         route.clear()
-        val plo = PolylineOptions()
+        googleMap.clear()
+        createNewMarkers(PlaceRepository.listPlace)
 
         while (count < 6) {
             tempObject = markers.random()
             if (tempObject.coor != "") {
                 if (tempObject in route) {
-                    TODO()
+
                 } else {
                     route.add(tempObject)
 
@@ -235,7 +240,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         plo.color(Color.RED)
         plo.geodesic(true)
         plo.startCap(RoundCap())
-        plo.width(20f)
+        plo.width(17f)
         plo.jointType(JointType.BEVEL)
         googleMap.addPolyline(plo)
     }
