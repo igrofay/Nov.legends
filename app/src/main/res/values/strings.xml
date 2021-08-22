@@ -25,4 +25,5 @@
     <string name="route">Маршруты</string>
     <string name="filter">Фильтр</string>
     <string name="save_edit">Сохранить изменения</string>
+    <string name="search">Поиск...</string>
 </resources>
