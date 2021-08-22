@@ -1,6 +1,7 @@
 package food.novgorod.legends.feature.descriptionplace
 
 import android.app.Dialog
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,8 @@ import food.novgorod.legends.databinding.FragmentDescriptionPlaceBinding
 import food.novgorod.legends.domain.place.PlaceRepository
 
 
-class DescriptionPlaceBottomSheetFragment : BottomSheetDialogFragment() {
+class
+DescriptionPlaceBottomSheetFragment : BottomSheetDialogFragment() {
     override fun getTheme(): Int = R.style.BottomSheetDialogTheme
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog = BottomSheetDialog(requireContext(), theme)
 
@@ -52,7 +54,7 @@ class DescriptionPlaceBottomSheetFragment : BottomSheetDialogFragment() {
         val player = SimpleExoPlayer.Builder(requireContext()).build()
 
         binding.playPause.setOnClickListener {
-            val mediaItem: MediaItem = MediaItem.fromUri("https://ic7.101.ru:8000/region_humor_165")
+            val mediaItem: MediaItem = MediaItem.fromUri(Uri.parse("android.resource://food.novgorod.legends/raw/sou"))
             player.setMediaItem(mediaItem)
             player.prepare()
 
