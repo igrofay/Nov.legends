@@ -37,6 +37,7 @@ import androidx.core.content.ContextCompat
 import android.graphics.drawable.Drawable
 
 import android.graphics.Canvas
+import android.graphics.Color
 import android.widget.Toast
 
 import androidx.annotation.DrawableRes
@@ -47,6 +48,14 @@ import food.novgorod.legends.databinding.ActivityMainBinding
 import food.novgorod.legends.domain.place.PlaceRepository
 import food.novgorod.legends.feature.descriptionplace.DescriptionPlaceBottomSheetFragment
 import food.novgorod.legends.feature.services.GPSTracker
+import com.google.android.gms.maps.model.JointType
+
+import com.google.android.gms.maps.model.RoundCap
+
+import com.google.android.gms.maps.model.PolylineOptions
+
+
+
 
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -62,6 +71,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     private lateinit var googleMap: GoogleMap
     private val markers: MutableList<Marker> = mutableListOf()
     lateinit var gpsTracker: GPSTracker
+    lateinit var route: MutableList<PlaceObject>
 
     var canGetLocation = false
 
@@ -70,10 +80,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-
-
-
         setContentView(binding.root)
 
         getLocationPermission()
@@ -83,6 +89,13 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
                 moveCameraOnLocation()
             }
         }
+
+        binding.bildRoute.setOnClickListener {
+            addPolyLine(PlaceRepository.listPlace)
+        }
+
+        route = mutableListOf()
+
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.mapFragment) as SupportMapFragment
@@ -146,7 +159,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         markers.forEach {
             if(it.coor == "") return@forEach
             val lat = it.coor.split(", ")
-            Log.e("Porno" , lat[0])
             val latLng = LatLng(lat[0].toDouble(), lat[1].toDouble())
             val marker = googleMap.addMarker(
                 MarkerOptions()
@@ -199,7 +211,39 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(pos))
     }
 
+    lateinit var tempObject: PlaceObject
+    // можно ставить несколько точек(больше 2х) и будет рисовать линию поочерёдно
+    fun addPolyLine(markers: List<PlaceObject>) {
+        var plo = PolylineOptions()
+        var count = 0
+        route.clear()
+        googleMap.clear()
+        createNewMarkers(PlaceRepository.listPlace)
 
+        while (count < 6) {
+            tempObject = markers.random()
+            if (tempObject.coor != "") {
+                if (tempObject in route) {
+
+                } else {
+                    route.add(tempObject)
+
+                    val lat = tempObject.coor.split(", ")
+                    val latLng = LatLng(lat[0].toDouble(), lat[1].toDouble())
+                    plo.add(latLng)
+
+                    count ++
+                }
+            }
+        }
+
+        plo.color(Color.RED)
+        plo.geodesic(true)
+        plo.startCap(RoundCap())
+        plo.width(17f)
+        plo.jointType(JointType.BEVEL)
+        googleMap.addPolyline(plo)
+    }
 
     private fun getLocationPermission() {
 
