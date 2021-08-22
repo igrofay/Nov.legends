@@ -83,7 +83,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         setContentView(binding.root)
 
         getLocationPermission()
-
+        binding.filterRoute.setOnClickListener {
+            BottomSheetFilterFragment().show(supportFragmentManager , "TAD")
+        }
         binding.myLocation.setOnClickListener {
             if (canGetLocation) {
                 moveCameraOnLocation()
