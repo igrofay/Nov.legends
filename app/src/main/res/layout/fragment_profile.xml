@@ -38,7 +38,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/editProfile"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:src="@drawable/ic_edit"
@@ -53,9 +53,9 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:src="@drawable/ic_theme_switch"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintBottom_toBottomOf="@+id/editProfile"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView5"
+            app:layout_constraintTop_toTopOf="@+id/editProfile"
             app:tint="@color/color_text" />
 
         <ImageView
@@ -63,9 +63,9 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:src="@drawable/ic_language"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+            app:layout_constraintBottom_toBottomOf="@+id/editProfile"
             app:layout_constraintEnd_toStartOf="@+id/imageTheme"
-            app:layout_constraintTop_toTopOf="@+id/imageView5"
+            app:layout_constraintTop_toTopOf="@+id/editProfile"
             app:tint="@color/color_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

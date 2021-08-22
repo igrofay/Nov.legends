@@ -24,4 +24,5 @@
     <string name="problem_internet">Проблема с интернетом</string>
     <string name="route">Маршруты</string>
     <string name="filter">Фильтр</string>
+    <string name="save_edit">Сохранить изменения</string>
 </resources>

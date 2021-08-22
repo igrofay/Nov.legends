@@ -40,6 +40,9 @@ class ProfileFragment : Fragment() {
             )
             shered.edit().putBoolean(App.DARK , isDark).apply()
         }
+        binding.editProfile.setOnClickListener {
+
+        }
         return binding.root
     }
 
