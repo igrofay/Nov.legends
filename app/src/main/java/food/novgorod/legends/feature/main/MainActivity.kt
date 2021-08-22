@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     lateinit var route: MutableList<PlaceObject>
 
     var canGetLocation = false
-
+    val listMutant = mutableListOf<PlaceObject>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +93,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         }
 
         binding.bildRoute.setOnClickListener {
-            addPolyLine(PlaceRepository.listPlace)
+            val list = PlaceRepository.listPlace
+            listMutant.clear()
+            list.forEach{
+                if(it.type in viewModel.getFilter()) listMutant.add(it)
+            }
+            googleMap.clear()
+            createNewMarkers(listMutant)
+            addPolyLine(listMutant)
         }
 
         route = mutableListOf()
@@ -216,11 +223,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     lateinit var tempObject: PlaceObject
     // можно ставить несколько точек(больше 2х) и будет рисовать линию поочерёдно
     fun addPolyLine(markers: List<PlaceObject>) {
+
         var plo = PolylineOptions()
         var count = 0
         route.clear()
         googleMap.clear()
-        createNewMarkers(PlaceRepository.listPlace)
+        createNewMarkers(listMutant)
 
         while (count < 6) {
             tempObject = markers.random()
